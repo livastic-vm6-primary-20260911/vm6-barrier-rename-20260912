@@ -4,19 +4,20 @@ commands_restrictions:
     conditions:
       - sender-permission >= write
 merge_queue:
-  max_parallel_checks: 2
-scopes:
-  source:
-    files:
-      src:
-        include:
-          - src/**
-      docs:
-        include:
-          - docs/**
-  barrier_files:
-    include:
-      - barrier/**
+  max_parallel_checks: 1
+priority_rules:
+  - name: urgent
+    conditions:
+      - title = VM6 priority interrupt high
+    priority: high
+    allow_checks_interruption: true
+  - name: normal
+    conditions:
+      - title = VM6 priority interrupt low
+    priority: low
 queue_rules:
   - name: default
     queue_conditions: []
+    merge_conditions:
+      - check-success = vm6-interrupt-ci
+    batch_size: 1

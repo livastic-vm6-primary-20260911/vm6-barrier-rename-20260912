@@ -1,0 +1,16 @@
+name: VM6 Interrupt CI Workflow
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  vm6-interrupt-ci:
+    name: vm6-interrupt-ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: long blocking gate
+        run: |
+          echo "VM6_INTERRUPT_CI_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          sleep 75
+          echo "VM6_INTERRUPT_CI_SUCCESS=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
