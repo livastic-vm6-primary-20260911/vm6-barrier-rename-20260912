@@ -1,0 +1,22 @@
+pull_request_rules: []
+commands_restrictions:
+  queue:
+    conditions:
+      - sender-permission >= write
+merge_queue:
+  max_parallel_checks: 2
+scopes:
+  source:
+    files:
+      src:
+        include:
+          - src/**
+      docs:
+        include:
+          - docs/**
+  barrier_files:
+    include:
+      - barrier/**
+queue_rules:
+  - name: default
+    queue_conditions: []
