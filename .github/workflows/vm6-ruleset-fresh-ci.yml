@@ -11,5 +11,5 @@ jobs:
     steps:
       - run: |
           echo "VM6_RULESET_FRESH_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          sleep 90
+          sleep 240
           echo "VM6_RULESET_FRESH_SUCCESS=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
