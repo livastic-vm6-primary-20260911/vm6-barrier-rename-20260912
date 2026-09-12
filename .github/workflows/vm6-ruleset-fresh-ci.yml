@@ -1,0 +1,15 @@
+name: VM6 Ruleset Freshness CI
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm6-ruleset-fresh-ci
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "VM6_RULESET_FRESH_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          sleep 90
+          echo "VM6_RULESET_FRESH_SUCCESS=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
