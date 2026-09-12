@@ -3,6 +3,9 @@ commands_restrictions:
   queue:
     conditions:
       - sender-permission >= write
+  update:
+    conditions:
+      - sender-permission >= write
 merge_queue:
   max_parallel_checks: 2
 scopes:
