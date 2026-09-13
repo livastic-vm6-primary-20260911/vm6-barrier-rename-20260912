@@ -1,9 +1,0 @@
-name: VM6 Direct Final Check
-on:
-  pull_request:
-
-jobs:
-  vm6-direct-final-check:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'single-step PR CI green for Direct Merge finalizer discriminator'
