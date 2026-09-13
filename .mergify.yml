@@ -1,13 +1,4 @@
-pull_request_rules:
-  - name: vm6-wa-classic-signatures-trusted-approval
-    conditions:
-      - base = vm6-classic-signatures-approval-target
-      - title = VM6 WA CLASSIC SIGNATURES APPROVAL
-      - approved-reviews-by = livastic-vm6-primary-20260911
-    actions:
-      merge:
-        method: merge
-        merge_bot_account: livastic-vm6-primary-20260911
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
