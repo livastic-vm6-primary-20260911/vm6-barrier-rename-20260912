@@ -15,11 +15,3 @@ queue_rules:
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
-merge_protections:
-  - name: VM6 public same-head policy-race proof
-    if: []
-    success_conditions:
-      - label = VM6-never-public-race-20260914
-merge_protections_settings:
-  reporting_method: check-runs
-  post_comment: false
