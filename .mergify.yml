@@ -1,4 +1,13 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-wa-classic-signatures
+    conditions:
+      - base = vm6-classic-signatures-target
+      - title = VM6 WA CLASSIC SIGNATURES
+      - body = VM6_SIGNATURE_RELEASE
+    actions:
+      merge:
+        method: merge
+        merge_bot_account: livastic-vm6-primary-20260911
 commands_restrictions:
   queue:
     conditions:
