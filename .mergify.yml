@@ -4,12 +4,19 @@ commands_restrictions:
     conditions:
       - sender-permission >= write
 merge_queue:
-  max_parallel_checks: 1
+  max_parallel_checks: 2
+scopes:
+  source:
+    files:
+      src:
+        include:
+          - src/**
+      docs:
+        include:
+          - docs/**
+  barrier_files:
+    include:
+      - barrier/**
 queue_rules:
   - name: default
     queue_conditions: []
-    merge_conditions:
-      - check-success = @github-actions/vm6-direct-close-check
-      - label = vm6-direct-release
-    merge_method: merge
-    checks_timeout: null
