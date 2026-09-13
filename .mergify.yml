@@ -6,18 +6,12 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
-scopes:
-  source:
-    files:
-      critical:
-        include:
-          - 'critical/?.txt'
 queue_rules:
   - name: default
     batch_size: 1
     queue_conditions: []
     merge_conditions:
-      - check-success = ci-gate
+      - check-success = @github-actions/vm6-synthetic-head-delay
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
