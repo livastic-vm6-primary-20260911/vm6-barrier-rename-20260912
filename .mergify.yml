@@ -10,8 +10,7 @@ queue_rules:
   - name: default
     batch_size: 1
     branch_protection_injection_mode: merge
-    queue_conditions:
-      - check-success = @github-actions/vm6-bp-merge-mode-delay
+    queue_conditions: []
     merge_conditions:
       - check-success = @github-actions/vm6-bp-merge-mode-delay
     max_checks_retries: 0
