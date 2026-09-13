@@ -15,14 +15,3 @@ queue_rules:
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
-priority_rules:
-  - name: urgent-interrupter
-    conditions:
-      - title = VM6_INTERRUPT_HIGH
-    priority: high
-    allow_checks_interruption: true
-  - name: normal-victim
-    conditions:
-      - title = VM6_INTERRUPT_LOW
-    priority: low
-    allow_checks_interruption: false
