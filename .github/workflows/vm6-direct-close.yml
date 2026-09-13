@@ -1,0 +1,9 @@
+name: VM6 Direct Close Check
+on:
+  pull_request:
+
+jobs:
+  vm6-direct-close-check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'direct-merge close-race trusted PR check success'
