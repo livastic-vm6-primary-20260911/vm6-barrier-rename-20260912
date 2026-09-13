@@ -15,13 +15,3 @@ queue_rules:
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
-merge_protections:
-  - name: VM6 auto policy-race protection
-    if: []
-    success_conditions:
-      - label = VM6-never-auto-policy-race-20260914
-merge_protections_settings:
-  reporting_method: check-runs
-  post_comment: false
-  auto_merge_conditions:
-    - title = VM6_AUTO_POLICY_RACE_GO
