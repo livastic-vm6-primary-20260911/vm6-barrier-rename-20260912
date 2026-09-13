@@ -4,19 +4,17 @@ commands_restrictions:
     conditions:
       - sender-permission >= write
 merge_queue:
-  max_parallel_checks: 2
-scopes:
-  source:
-    files:
-      src:
-        include:
-          - src/**
-      docs:
-        include:
-          - docs/**
-  barrier_files:
-    include:
-      - barrier/**
+  mode: serial
+  max_parallel_checks: 1
 queue_rules:
   - name: default
-    queue_conditions: []
+    batch_size: 1
+    branch_protection_injection_mode: merge
+    queue_conditions:
+      - check-success = @github-actions/vm6-bp-merge-mode-delay
+    merge_conditions:
+      - check-success = @github-actions/vm6-bp-merge-mode-delay
+    max_checks_retries: 0
+    merge_method: merge
+    merge_bot_account: livastic-vm6-primary-20260911
+    checks_timeout: null
