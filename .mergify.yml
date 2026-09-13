@@ -4,8 +4,20 @@ commands_restrictions:
     conditions:
       - sender-permission >= write
 merge_queue:
-  mode: serial
-  max_parallel_checks: 1
+  mode: parallel
+  max_parallel_checks: 2
+scopes:
+  source:
+    files:
+      protected:
+        include:
+          - protected/**
+      safe:
+        include:
+          - safe/**
+  barrier_files:
+    include:
+      - protected/**
 queue_rules:
   - name: default
     batch_size: 1
