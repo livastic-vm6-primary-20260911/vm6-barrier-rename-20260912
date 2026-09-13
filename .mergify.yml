@@ -1,4 +1,10 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-protected-head-cleanup
+    conditions:
+      - closed
+    actions:
+      delete_head_branch:
+        force: false
 commands_restrictions:
   queue:
     conditions:
