@@ -1,12 +1,4 @@
-pull_request_rules:
-  - name: vm6-wa-classic-app-pin-crossproduct
-    conditions:
-      - title = VM6 WA CLASSIC APP PIN
-      - body = VM6_APP_PIN_RELEASE
-    actions:
-      merge:
-        method: merge
-        merge_bot_account: livastic-vm6-primary-20260911
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
