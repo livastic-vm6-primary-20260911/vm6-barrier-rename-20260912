@@ -1,10 +1,4 @@
-pull_request_rules:
-  - name: vm6-wa-close-race
-    conditions:
-      - title = VM6 WA CLOSE RACE TRIGGER
-    actions:
-      merge:
-        method: merge
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
