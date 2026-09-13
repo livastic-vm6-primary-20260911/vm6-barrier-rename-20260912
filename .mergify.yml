@@ -6,6 +6,58 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
+scopes:
+  source:
+    files:
+      g01_star_nested:
+        include: ['g01/*.md']
+      g02_q_nested:
+        include: ['g02/?.md']
+      g03_doublestar_deep:
+        include: ['g03/**/file.md']
+      g04_doublestar_zero:
+        include: ['g04/**/file.md']
+      g05_trailing_doublestar:
+        include: ['g05/**']
+      g06_brace:
+        include: ['g06/{a,b}.txt']
+      g07_class:
+        include: ['g07/[ab].txt']
+      g08_bang_class:
+        include: ['g08/[!a].txt']
+      g09_dotfile:
+        include: ['g09/*']
+      g10_unicode_q:
+        include: ['g10/?.txt']
+      g11_case_sensitive:
+        include: ['g11/FILE.txt']
+      g12_space:
+        include: ['g12/*.txt']
+      g13_hash:
+        include: ['g13/#*.txt']
+      g14_bang_literal:
+        include: ['g14/!*.txt']
+      g15_brace_ext:
+        include: ['g15/file.{md,txt}']
+      g16_prefix_doublestar:
+        include: ['**/g16/file.txt']
+      g17_range:
+        include: ['g17/[a-z].txt']
+      g18_plus_literal:
+        include: ['g18/a+b.txt']
+      g19_paren_literal:
+        include: ['g19/(x).txt']
+      g20_dotdir:
+        include: ['.g20/**']
+      g21_leading_slash:
+        include: ['/g21/*.txt']
+      g22_double_doublestar:
+        include: ['g22/**/**/file.txt']
+      g23_star_dot:
+        include: ['g23/*.*']
+      g24_exclude_nested:
+        include: ['g24/**']
+        exclude: ['g24/*.md']
 queue_rules:
   - name: default
     batch_size: 1
