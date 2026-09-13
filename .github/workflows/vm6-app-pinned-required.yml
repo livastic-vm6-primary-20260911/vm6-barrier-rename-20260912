@@ -1,0 +1,19 @@
+name: VM6 App-Pinned Required
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  vm6-app-pinned-required:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trusted producer discriminator
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo 'controlled trusted producer failure on PR heads'
+            exit 1
+          fi
+          echo 'bootstrap trusted GitHub Actions producer on main'
