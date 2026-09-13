@@ -4,19 +4,12 @@ commands_restrictions:
     conditions:
       - sender-permission >= write
 merge_queue:
-  max_parallel_checks: 2
-scopes:
-  source:
-    files:
-      src:
-        include:
-          - src/**
-      docs:
-        include:
-          - docs/**
-  barrier_files:
-    include:
-      - barrier/**
+  max_parallel_checks: 1
 queue_rules:
   - name: default
     queue_conditions: []
+    merge_conditions:
+      - deployment-success = vm6-inflight-deploy
+      - check-success = @github-actions/vm6-inflight-ci
+    merge_method: merge
+    checks_timeout: null

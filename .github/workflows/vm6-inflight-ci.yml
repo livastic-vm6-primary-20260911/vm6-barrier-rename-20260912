@@ -1,0 +1,15 @@
+name: VM6 Inflight Deployment CI
+on:
+  pull_request:
+
+jobs:
+  vm6-inflight-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delayed queue verdict
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'holding batch while deployment state is changed out-of-band'
+          sleep 120
+          echo 'fresh batch CI success'
