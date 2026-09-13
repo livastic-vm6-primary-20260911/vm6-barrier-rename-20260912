@@ -20,3 +20,10 @@ scopes:
 queue_rules:
   - name: default
     queue_conditions: []
+merge_protections:
+  - name: VM6 Sensitive Path Review
+    description: Require security review for sensitive path changes
+    if:
+      - files ~= ^zzzz-sensitive/
+    success_conditions:
+      - label = security-reviewed
