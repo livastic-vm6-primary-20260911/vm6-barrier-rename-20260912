@@ -1,0 +1,15 @@
+name: VM6 Synthetic Head Delay
+on:
+  pull_request:
+
+jobs:
+  vm6-synthetic-head-delay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hold synthetic batch
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'holding while original PR head changes'
+          sleep 120
+          echo 'old synthetic CI success'
