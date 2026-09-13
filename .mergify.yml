@@ -1,20 +1,4 @@
 pull_request_rules: []
-commands_restrictions:
-  queue:
-    conditions:
-      - sender-permission >= write
-merge_queue:
-  mode: serial
-  max_parallel_checks: 1
-queue_rules:
-  - name: default
-    batch_size: 1
-    queue_conditions: []
-    merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
 merge_protections:
   - name: VM6 review-thread automerge finalizer protection
     if: []
@@ -24,4 +8,4 @@ merge_protections_settings:
   reporting_method: check-runs
   post_comment: false
   auto_merge_conditions:
-    - current-datetime >= 2026-09-13T22:36:00Z
+    - current-datetime >= 2026-09-13T22:40:00Z
