@@ -1,11 +1,4 @@
-pull_request_rules:
-  - name: vm6-copy-branch-collision
-    conditions:
-      - title = VM6 COPY COLLISION TRIGGER
-    actions:
-      copy:
-        branches:
-          - release-vm6-copy
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
