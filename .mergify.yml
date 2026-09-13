@@ -19,7 +19,7 @@ merge_protections:
   - name: VM6 public same-head policy-race proof
     if: []
     success_conditions:
-      - base = main
+      - label = VM6-never-public-race-20260914
 merge_protections_settings:
   reporting_method: check-runs
   post_comment: false
