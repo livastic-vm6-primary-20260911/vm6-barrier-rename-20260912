@@ -1,0 +1,17 @@
+name: VM6 github-actions bot command prerequisite
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+  issues: write
+jobs:
+  comment:
+    if: github.event.head_commit.message == 'test: github-actions bot command prerequisite'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post one Mergify queue command as github-actions bot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/m6d911z2/vm6-barrier-rename-20260912/issues/33/comments -f body='@Mergifyio queue'
