@@ -24,4 +24,4 @@ merge_protections_settings:
   reporting_method: check-runs
   post_comment: false
   auto_merge_conditions:
-    - current-datetime >= 2026-09-13T22:28:30Z
+    - current-datetime >= 2026-09-13T22:36:00Z
