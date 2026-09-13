@@ -1,12 +1,4 @@
-pull_request_rules:
-  - name: vm6-wa-classic-last-push-crossproduct
-    conditions:
-      - title = VM6 WA CLASSIC LAST PUSH
-      - body = VM6_RELEASE
-    actions:
-      merge:
-        method: merge
-        merge_bot_account: livastic-vm6-primary-20260911
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
