@@ -1,9 +1,0 @@
-name: VM6 Classic Signature MQ Check
-on:
-  pull_request:
-
-jobs:
-  vm6-classic-signature-mq-check:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'trusted CI success for classic signed-commit MQ discriminator'

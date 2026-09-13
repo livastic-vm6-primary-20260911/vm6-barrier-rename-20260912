@@ -4,15 +4,19 @@ commands_restrictions:
     conditions:
       - sender-permission >= write
 merge_queue:
-  mode: serial
-  max_parallel_checks: 1
+  max_parallel_checks: 2
+scopes:
+  source:
+    files:
+      src:
+        include:
+          - src/**
+      docs:
+        include:
+          - docs/**
+  barrier_files:
+    include:
+      - barrier/**
 queue_rules:
-  - name: classic-signature-mq
-    batch_size: 1
-    queue_conditions:
-      - check-success = @github-actions/vm6-classic-signature-mq-check
-    merge_conditions:
-      - check-success = @github-actions/vm6-classic-signature-mq-check
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
+  - name: default
+    queue_conditions: []
