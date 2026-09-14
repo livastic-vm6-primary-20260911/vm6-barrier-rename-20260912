@@ -20,7 +20,7 @@ merge_protections:
     if:
       - base = vm6-mp-config-stable-base-20260915
     success_conditions:
-      - base = vm6-mp-config-stable-base-20260915
+      - label = VM6-never-nondefault-config-20260915
 merge_protections_settings:
   reporting_method: check-runs
   post_comment: false
