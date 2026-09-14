@@ -1,14 +1,17 @@
 pull_request_rules: []
-merge_protections:
-  - name: VM6 auto-merge rule A author
-    if: []
-    success_conditions:
-      - author = livastic-vm6-primary-20260911
-  - name: VM6 auto-merge rule B label
-    if: []
-    success_conditions:
-      - label = bug
-merge_protections_settings:
-  reporting_method: check-runs
-  post_comment: false
-  auto_merge_conditions: true
+commands_restrictions:
+  queue:
+    conditions:
+      - sender-permission >= write
+merge_queue:
+  mode: serial
+  max_parallel_checks: 1
+queue_rules:
+  - name: default
+    batch_size: 1
+    queue_conditions: []
+    merge_conditions:
+      - check-success = @github-actions/vm6-synthetic-head-delay
+    max_checks_retries: 0
+    merge_method: merge
+    checks_timeout: null
