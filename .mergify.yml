@@ -1,17 +1,15 @@
 pull_request_rules: []
 commands_restrictions:
-  queue:
+  backport:
     conditions:
       - sender-permission >= write
-merge_queue:
-  mode: serial
-  max_parallel_checks: 1
-queue_rules:
-  - name: default
-    batch_size: 1
-    queue_conditions: []
-    merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
+merge_protections:
+  - name: VM6 trusted generated backport provenance
+    if: []
+    success_conditions:
+      - author = mergify[bot]
+      - head ~= ^mergify/bp/vm6-bp-trusted-target-20260914/pr-
+      - check-success = @github-actions/vm6-backport-trusted-ci
+merge_protections_settings:
+  reporting_method: check-runs
+  post_comment: false
