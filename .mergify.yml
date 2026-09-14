@@ -7,7 +7,7 @@ merge_protections:
   - name: VM6 auto-merge rule B label
     if: []
     success_conditions:
-      - label = vm6-second-gate
+      - label = bug
 merge_protections_settings:
   reporting_method: check-runs
   post_comment: false
