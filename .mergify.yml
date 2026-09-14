@@ -18,7 +18,7 @@ queue_rules:
 merge_protections:
   - name: VM6 non-default base config freshness probe
     if:
-      - label = VM6-never-nondefault-config-20260915
+      - base = vm6-mp-config-stable-base-20260915
     success_conditions:
       - label = VM6-never-nondefault-config-20260915
 merge_protections_settings:
