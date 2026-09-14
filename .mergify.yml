@@ -3,7 +3,7 @@ merge_protections:
   - name: VM6 auto-merge rule A author
     if: []
     success_conditions:
-      - author = m6d911z2
+      - author = livastic-vm6-primary-20260911
   - name: VM6 auto-merge rule B label
     if: []
     success_conditions:
