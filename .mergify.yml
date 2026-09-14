@@ -10,8 +10,7 @@ queue_rules:
   - name: default
     batch_size: 1
     queue_conditions: []
-    merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
+    merge_conditions: []
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
