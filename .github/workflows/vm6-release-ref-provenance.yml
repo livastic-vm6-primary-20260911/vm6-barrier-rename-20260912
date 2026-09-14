@@ -1,0 +1,27 @@
+name: VM6 Release Ref Provenance Canary
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - name: Prove which content the trusted default-branch workflow consumed
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "VM6_EVENT_TAG=${{ github.event.release.tag_name }}"
+          echo "VM6_GITHUB_SHA=$GITHUB_SHA"
+          echo "VM6_CHECKED_OUT_SHA=$(git rev-parse HEAD)"
+          if [[ -f vm6-unreviewed-release-content.txt ]]; then
+            echo 'VM6_UNREVIEWED_TAG_CONTENT=present'
+            cat vm6-unreviewed-release-content.txt
+          else
+            echo 'VM6_UNREVIEWED_TAG_CONTENT=absent'
+            exit 42
+          fi
