@@ -15,3 +15,11 @@ queue_rules:
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
+merge_protections:
+  - name: VM6 review state freshness write actor
+    if: []
+    success_conditions:
+      - '#approved-reviews-by >= 1'
+merge_protections_settings:
+  reporting_method: check-runs
+  post_comment: false
