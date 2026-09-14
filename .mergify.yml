@@ -15,3 +15,9 @@ queue_rules:
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
+scopes:
+  source:
+    files:
+      critical:
+        include:
+          - 'sensitive/**'

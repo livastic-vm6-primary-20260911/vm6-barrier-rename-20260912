@@ -1,0 +1,72 @@
+name: VM6 Scope Policy Provenance
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  detect-scopes:
+    runs-on: ubuntu-24.04
+    outputs:
+      critical: ${{ fromJSON(steps.scopes.outputs.scopes).critical }}
+      trusted_base_critical: ${{ steps.base-oracle.outputs.critical }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Detect scopes from normal PR checkout
+        id: scopes
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: scopes
+          mergify_cli_version: latest
+      - name: Trusted base-config counterfactual
+        id: base-oracle
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_SCOPE: ${{ fromJSON(steps.scopes.outputs.scopes).critical }}
+        run: |
+          set -euo pipefail
+          git show "$BASE_SHA:.mergify.yml" > "$RUNNER_TEMP/trusted-base-mergify.yml"
+          mergify ci scopes \
+            --config "$RUNNER_TEMP/trusted-base-mergify.yml" \
+            --base "$BASE_SHA" \
+            --head "$HEAD_SHA" \
+            --write "$RUNNER_TEMP/trusted-scopes.json"
+          BASE_SCOPE=$(jq -r '(.scopes | index("critical")) != null' "$RUNNER_TEMP/trusted-scopes.json")
+          echo "critical=$BASE_SCOPE" >> "$GITHUB_OUTPUT"
+          echo "VM6_HEAD_CONFIG_CRITICAL=$HEAD_SCOPE"
+          echo "VM6_TRUSTED_BASE_CONFIG_CRITICAL=$BASE_SCOPE"
+  critical-tests:
+    needs: detect-scopes
+    if: ${{ needs.detect-scopes.outputs.critical == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Critical security gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f sensitive/attack.txt ]]; then
+            echo 'VM6_CRITICAL_GUARD_FAIL: attacker-sensitive change reached critical CI'
+            exit 42
+          fi
+          echo 'VM6_CRITICAL_GUARD_PASS'
+  ci-gate:
+    if: ${{ !cancelled() }}
+    needs:
+      - detect-scopes
+      - critical-tests
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Aggregate conditional jobs exactly like the Mergify docs pattern
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: wait-jobs
+          jobs: ${{ toJSON(needs) }}
+      - name: Record decision inputs
+        run: |
+          echo 'VM6_CI_GATE_SUCCESS'
+          echo 'head-critical=${{ needs.detect-scopes.outputs.critical }}'
+          echo 'trusted-base-critical=${{ needs.detect-scopes.outputs.trusted_base_critical }}'
