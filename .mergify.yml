@@ -11,6 +11,7 @@ queue_rules:
     batch_size: 1
     queue_conditions: []
     merge_conditions:
+      - current-datetime < 2026-09-14T06:56:52Z
       - check-success = @github-actions/vm6-synthetic-head-delay
     max_checks_retries: 0
     merge_method: merge
