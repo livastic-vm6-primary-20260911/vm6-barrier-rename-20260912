@@ -4,17 +4,14 @@ commands_restrictions:
     conditions:
       - sender-permission >= write
 merge_queue:
-  mode: parallel
+  mode: serial
   max_parallel_checks: 1
-scopes:
-  source:
-    manual: null
 queue_rules:
   - name: default
     batch_size: 1
     queue_conditions: []
     merge_conditions:
-      - check-success = @github-actions/vm6-direct-guard
+      - check-success = @github-actions/vm6-synthetic-head-delay
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
