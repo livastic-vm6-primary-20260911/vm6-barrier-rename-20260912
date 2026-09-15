@@ -1,4 +1,13 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 post-check same-SHA context discriminator
+    conditions:
+      - title = VM6 POSTCHECK SAME SHA CONTEXT 20260915
+    actions:
+      post_check:
+        title: VM6 post-check same-SHA context discriminator
+        summary: VM6 controlled PR-context provenance discriminator
+        success_conditions:
+          - base = vm6-postcheck-base-a-20260915
 commands_restrictions:
   queue:
     conditions:
