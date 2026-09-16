@@ -5,13 +5,13 @@ commands_restrictions:
       - sender-permission >= write
 merge_queue:
   mode: serial
-  max_parallel_checks: 2
+  max_parallel_checks: 1
 queue_rules:
   - name: default
     batch_size: 1
     queue_conditions: []
     merge_conditions:
-      - check-success = vm6-held-resume-never
+      - check-success = @github-actions/vm6-synthetic-head-delay
     max_checks_retries: 0
-    checks_timeout: null
     merge_method: merge
+    checks_timeout: null
