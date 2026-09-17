@@ -1,0 +1,27 @@
+name: VM6 AutoQ M6D Broken 20260918
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  report:
+    if: >-
+      github.event.issue.pull_request != null &&
+      startsWith(github.event.comment.body, 'VM6_AUTOQ_M6D_BROKEN_N3Q7')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install published client
+        run: python -m pip install --disable-pip-version-check -q 'pytest==9.1.1' 'pytest-mergify==2026.9.11.2'
+      - name: Create trusted deterministic failing test
+        shell: bash
+        run: |
+          cat > test_vm6_autoq_m6d_broken.py <<'PY'
+          def test_vm6_autoq_m6d_broken_20260918_n3q7():
+              assert False, 'VM6 controlled deterministic failure'
+          PY
+      - name: Report through Test Insights
+        env:
+          MERGIFY_TOKEN: ${{ secrets.VM6_MERGIFY_CI_TEMP_20260918 }}
+        run: pytest -q -s test_vm6_autoq_m6d_broken.py
