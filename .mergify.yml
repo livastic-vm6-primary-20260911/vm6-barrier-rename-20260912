@@ -6,12 +6,21 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
+scopes:
+  source:
+    files:
+      critical_empty:
+        include: []
+      control_with_exclude:
+        include: []
+        exclude:
+          - 'never-match/**'
 queue_rules:
   - name: default
     batch_size: 1
     queue_conditions: []
     merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
+      - check-success = ci-gate
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null

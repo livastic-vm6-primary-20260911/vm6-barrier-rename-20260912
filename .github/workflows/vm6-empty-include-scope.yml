@@ -1,0 +1,44 @@
+name: VM6 Empty Include Scope CI
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  detect-latest:
+    runs-on: ubuntu-24.04
+    outputs:
+      critical_empty: ${{ fromJSON(steps.scopes.outputs.scopes).critical_empty }}
+      control_with_exclude: ${{ fromJSON(steps.scopes.outputs.scopes).control_with_exclude }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Detect scopes with current latest CLI
+        id: scopes
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: scopes
+          mergify_cli_version: latest
+      - name: Record scope result
+        run: echo 'latest_scopes=${{ steps.scopes.outputs.scopes }}'
+
+  critical-empty-tests:
+    needs: detect-latest
+    if: ${{ needs.detect-latest.outputs.critical_empty == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Critical empty-include security test
+        run: |
+          echo 'VM6 critical empty-include test executed'
+          exit 1
+
+  ci-gate:
+    if: ${{ !cancelled() }}
+    needs:
+      - detect-latest
+      - critical-empty-tests
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Aggregate required gate
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: wait-jobs
+          jobs: ${{ toJSON(needs) }}
