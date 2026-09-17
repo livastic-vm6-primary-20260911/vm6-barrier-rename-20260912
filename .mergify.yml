@@ -1,4 +1,4 @@
-pull_request_rules: []
+extends: ci-admin-boundary-vm6
 commands_restrictions:
   queue:
     conditions:
