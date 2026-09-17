@@ -1,11 +1,11 @@
 pull_request_rules:
-  - name: VM6 reset external merge freshness R9V4
+  - name: VM6 reset external merge freshness R9V5
     conditions:
-      - base = vm6-reset-base-r9v4
-      - title = VM6 reset external merge freshness R9V4
+      - base = vm6-reset2-base-r9v5
+      - title = VM6 reset external merge freshness R9V5
     actions:
       queue:
-        name: vm6-reset-r9v4
+        name: vm6-reset-r9v5
 commands_restrictions:
   queue:
     conditions:
@@ -13,9 +13,9 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
-  reset_on_external_merge: always
+  reset_on_external_merge: never
 queue_rules:
-  - name: vm6-reset-r9v4
+  - name: vm6-reset-r9v5
     batch_size: 1
     queue_conditions: []
     merge_conditions:
