@@ -1,0 +1,45 @@
+name: VM6 Backslash Separator Glob CI
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  detect-latest:
+    runs-on: ubuntu-24.04
+    outputs:
+      critical: ${{ fromJSON(steps.scopes.outputs.scopes).critical }}
+      scopes: ${{ steps.scopes.outputs.scopes }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Detect scopes with current latest CLI
+        id: scopes
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: scopes
+          mergify_cli_version: latest
+      - name: Record latest scope result
+        run: |
+          echo "latest_scopes=${{ steps.scopes.outputs.scopes }}"
+
+  critical-tests:
+    needs: detect-latest
+    if: ${{ needs.detect-latest.outputs.critical == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Critical security test
+        run: |
+          echo 'VM6 critical test executed'
+          exit 1
+
+  ci-gate:
+    if: ${{ !cancelled() }}
+    needs:
+      - detect-latest
+      - critical-tests
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Aggregate required gate
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: wait-jobs
+          jobs: ${{ toJSON(needs) }}
