@@ -1,4 +1,9 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 delete-head-branch lifecycle contract probe
+    conditions:
+      - head = vm6-delete-lifecycle-probe-20260918
+    actions:
+      delete_head_branch: {}
 commands_restrictions:
   queue:
     conditions:
