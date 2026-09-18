@@ -3,9 +3,6 @@ commands_restrictions:
   queue:
     conditions:
       - sender-permission >= write
-  squash:
-    conditions:
-      - sender-permission >= read
 merge_queue:
   mode: serial
   max_parallel_checks: 1
