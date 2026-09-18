@@ -1,4 +1,13 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 LOCAL DEFAULT WEAK D16L1
+    conditions:
+      - base = vm6-local-default-impact-base-d16l1
+      - title = VM6 local default branch impact D16L1
+      - label = vm6-local-default-go-d16l1
+      - check-success = vm6-local-default-final-d16l1
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
