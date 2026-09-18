@@ -1,17 +1,1 @@
-pull_request_rules: []
-commands_restrictions:
-  queue:
-    conditions:
-      - sender-permission >= write
-merge_queue:
-  mode: serial
-  max_parallel_checks: 1
-queue_rules:
-  - name: default
-    batch_size: 1
-    queue_conditions: []
-    merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
+extends: vm6-scope-config-precedence-20260918
