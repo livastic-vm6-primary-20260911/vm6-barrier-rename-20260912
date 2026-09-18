@@ -7,11 +7,14 @@ merge_queue:
   mode: serial
   max_parallel_checks: 1
 queue_rules:
-  - name: default
+  - name: vm6-ff-lastpush-t9s1
     batch_size: 1
-    queue_conditions: []
-    merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
+    queue_conditions:
+      - base = vm6-ff-lastpush-base-t9s1
+      - title = VM6 fast-forward last-push approval T9S1
+    merge_conditions: []
+    branch_protection_injection_mode: merge
     max_checks_retries: 0
-    merge_method: merge
+    merge_method: fast-forward
+    update_method: rebase
     checks_timeout: null
