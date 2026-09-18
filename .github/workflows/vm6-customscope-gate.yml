@@ -1,0 +1,45 @@
+name: VM6 Custom Scope Gate
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  detect-scopes:
+    runs-on: ubuntu-24.04
+    outputs:
+      critical: ${{ fromJSON(steps.scopes.outputs.scopes).critical }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Detect scopes with owner-configured custom Mergify path
+        id: scopes
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: scopes
+          mergify_config_path: .ci/mergify-scopes.yml
+
+  critical-required:
+    needs: detect-scopes
+    if: ${{ needs.detect-scopes.outputs.critical == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Controlled required critical test
+        run: |
+          echo 'VM6 controlled critical regression gate: expected failure when critical scope is detected'
+          exit 1
+
+  ci-gate:
+    if: ${{ !cancelled() }}
+    needs:
+      - detect-scopes
+      - critical-required
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Aggregate required jobs
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: wait-jobs
+          jobs: ${{ toJSON(needs) }}

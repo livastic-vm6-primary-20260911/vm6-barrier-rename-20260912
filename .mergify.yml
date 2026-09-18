@@ -1,4 +1,11 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 current external-fork custom-scope autoqueue
+    conditions:
+      - base = main
+      - -mergify-configuration-changed
+      - check-success = @github-actions/ci-gate
+    actions:
+      queue:
 commands_restrictions:
   queue:
     conditions:
@@ -11,7 +18,7 @@ queue_rules:
     batch_size: 1
     queue_conditions: []
     merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
+      - check-success = @github-actions/ci-gate
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
