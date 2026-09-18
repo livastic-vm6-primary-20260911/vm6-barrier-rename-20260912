@@ -1,4 +1,4 @@
-extends: vm6-extends-source-20260913
+extends: vm6-scope-config-precedence-20260918
 pull_request_rules:
   - name: VM6 EXT LOCAL SENTINEL E11B1
     conditions:
