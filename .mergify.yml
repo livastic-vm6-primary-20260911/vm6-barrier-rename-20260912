@@ -1,12 +1,4 @@
-pull_request_rules:
-  - name: VM6 stale reviewer lowpriv fork chain T7P9
-    conditions:
-      - base = vm6-review-chain-base-t7p9
-      - title = VM6 stale reviewer lowpriv fork chain T7P9
-      - -changes-requested-reviews-by = @m6d911z2/vm6-team-revocation-control
-    actions:
-      merge:
-        method: merge
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
