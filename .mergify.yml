@@ -8,6 +8,14 @@ pull_request_rules:
     actions:
       merge:
         method: merge
+  - name: VM6 native stale reviewer team guard bypass T7P8
+    conditions:
+      - base = vm6-native-review-impact-t7p8
+      - title = VM6 native stale team identity impact T7P8
+      - -changes-requested-reviews-by = @m6d911z2/vm6-team-revocation-control
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
