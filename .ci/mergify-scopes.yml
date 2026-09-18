@@ -1,8 +1,9 @@
 scopes:
   source:
-    critical:
-      include:
-        - critical/**/*
-    docs:
-      include:
-        - docs/**/*
+    files:
+      critical:
+        include:
+          - critical/**/*
+      docs:
+        include:
+          - docs/**/*
