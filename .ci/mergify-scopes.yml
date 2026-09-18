@@ -1,6 +1,0 @@
-scopes:
-  source:
-    files:
-      docs:
-        include:
-          - docs/**/*
