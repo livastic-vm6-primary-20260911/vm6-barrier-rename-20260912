@@ -15,3 +15,12 @@ queue_rules:
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
+merge_protections:
+  - name: VM6 review dismissal invalidation D10R1
+    if:
+      - base = vm6-review-dismiss-base-d10r1
+    success_conditions:
+      - '#approved-reviews-by >= 1'
+merge_protections_settings:
+  reporting_method: check-runs
+  post_comment: false
