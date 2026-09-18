@@ -1,4 +1,12 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 regex required check regression T8Q1
+    conditions:
+      - base = vm6-regex-check-base-t8q1
+      - title = VM6 regex required check regression T8Q1
+      - check-success ~= ^VM6_REGEX_GATE_T8Q1$
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
