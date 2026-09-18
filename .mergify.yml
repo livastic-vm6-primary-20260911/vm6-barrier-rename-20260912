@@ -1,4 +1,14 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 dismiss old approvals D17R1
+    conditions:
+      - base = vm6-dismiss-base-d17r1
+      - title = VM6 dismiss post-push review D17R1
+    actions:
+      dismiss_reviews:
+        approved: true
+        changes_requested: false
+        when: synchronize
+        message: VM6 D17R1 dismiss only pre-push approvals
 commands_restrictions:
   queue:
     conditions:
