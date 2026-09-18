@@ -1,21 +1,4 @@
-pull_request_rules:
-  - name: VM6 stale reviewer team guard bypass T7P4
-    conditions:
-      - base = vm6-team-change-base-t7p4
-      - title = VM6 team REQUEST_CHANGES resolver T7P4
-      - -changes-requested-reviews-by = @m6d911z2/vm6-team-revocation-control
-      - check-success = vm6-review-identity-native-gate
-    actions:
-      merge:
-        method: merge
-  - name: VM6 native stale reviewer team guard bypass T7P8
-    conditions:
-      - base = vm6-native-review-impact-t7p8
-      - title = VM6 native stale team identity impact T7P8
-      - -changes-requested-reviews-by = @m6d911z2/vm6-team-revocation-control
-    actions:
-      merge:
-        method: merge
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
