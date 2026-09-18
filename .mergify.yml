@@ -1,8 +1,1 @@
 extends: vm6-scope-config-precedence-20260918
-pull_request_rules:
-  - name: VM6 EXT LOCAL SENTINEL E11B1
-    conditions:
-      - title = VM6 extends default branch freshness E11B1
-    actions:
-      comment:
-        message: VM6_EXT_LOCAL
