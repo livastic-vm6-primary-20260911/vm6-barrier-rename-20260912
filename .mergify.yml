@@ -1,17 +1,27 @@
-pull_request_rules: []
+pull_request_rules:
+- name: VM6 dismiss requested reviewers R18F1
+  conditions:
+  - base = vm6-dismiss-requested-base-r18f1
+  - title = VM6 dismiss requested reviewers R18F1
+  actions:
+    dismiss_reviews:
+      approved: from_requested_reviewers
+      changes_requested: false
+      when: synchronize
+      message: VM6_R18F1_DISMISS_REQUESTED
 commands_restrictions:
   queue:
     conditions:
-      - sender-permission >= write
+    - sender-permission >= write
 merge_queue:
   mode: serial
   max_parallel_checks: 1
 queue_rules:
-  - name: default
-    batch_size: 1
-    queue_conditions: []
-    merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
+- name: default
+  batch_size: 1
+  queue_conditions: []
+  merge_conditions:
+  - check-success = @github-actions/vm6-synthetic-head-delay
+  max_checks_retries: 0
+  merge_method: merge
+  checks_timeout: null
