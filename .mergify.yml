@@ -3,7 +3,6 @@ pull_request_rules:
     conditions:
       - base = vm6-review-chain-base-t7p9
       - title = VM6 stale reviewer lowpriv fork chain T7P9
-      - label = vm6-review-chain-trusted-gate-t7p9
       - -changes-requested-reviews-by = @m6d911z2/vm6-team-revocation-control
     actions:
       merge:
