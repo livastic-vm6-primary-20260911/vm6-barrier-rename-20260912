@@ -33,8 +33,11 @@ jobs:
           set -euo pipefail
           RESP=$(curl -fsSL -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=vm6:controlled-release-proof")
           JWT=$(jq -r .value <<<"$RESP")
-          PAYLOAD=$(cut -d. -f2 <<<"$JWT" | tr '_-' '/+')
-          PAD=$(( (4 - ${#PAYLOAD} % 4) % 4 ))
-          PAYLOAD="$PAYLOAD$(printf '=%.0s' $(seq 1 $PAD))"
-          printf '%s' "$PAYLOAD" | base64 -d > "$RUNNER_TEMP/oidc.json"
-          jq '{sub,aud,repository,repository_owner,ref,sha,workflow,workflow_ref,workflow_sha,environment,actor,event_name}' "$RUNNER_TEMP/oidc.json"
+          python3 - "$JWT" <<'PYCODE'
+          import base64, json, sys
+          payload = sys.argv[1].split('.')[1]
+          payload += '=' * (-len(payload) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(payload))
+          keep = ['sub','aud','repository','repository_owner','ref','sha','workflow','workflow_ref','workflow_sha','environment','actor','event_name']
+          print(json.dumps({k: claims.get(k) for k in keep}, sort_keys=True))
+          PYCODE
