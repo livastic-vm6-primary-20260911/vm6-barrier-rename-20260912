@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment: release
     steps:
-      - name: Record trusted workflow context before checkout
+      - name: VM6 attacker-controlled trusted release marker
         env:
           EVENT_TAG: ${{ github.event.release.tag_name }}
           EVENT_TARGET: ${{ github.event.release.target_commitish }}
@@ -18,29 +18,20 @@ jobs:
           EVENT_SHA: ${{ github.sha }}
           EVENT_REF: ${{ github.ref }}
         run: |
+          echo 'VM6_ATTACKER_RELEASE_WORKFLOW_EXECUTED=1'
           echo "VM6_RELEASE_TAG=$EVENT_TAG"
           echo "VM6_RELEASE_TARGET=$EVENT_TARGET"
           echo "VM6_WORKFLOW_SHA=$WORKFLOW_SHA"
           echo "VM6_EVENT_SHA=$EVENT_SHA"
           echo "VM6_EVENT_REF=$EVENT_REF"
-      - uses: actions/checkout@v5
-        with:
-          ref: ${{ github.event.release.tag_name }}
-          fetch-depth: 0
-      - name: Prove release tag content, without publishing anything
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "VM6_CHECKED_OUT_SHA=$(git rev-parse HEAD)"
-          printf 'VM6_TAG_PAYLOAD='; cat vm6-release-payload.txt
-      - name: Mint and decode the same GitHub OIDC class used by Trusted Publishing
+      - name: Mint and decode controlled GitHub OIDC claims
         shell: bash
         env:
           REQUEST_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
           REQUEST_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
         run: |
           set -euo pipefail
-          RESP=$(curl -fsSL -H "Authorization: bearer $REQUEST_TOKEN" "${REQUEST_URL}&audience=npm:registry.npmjs.org")
+          RESP=$(curl -fsSL -H "Authorization: bearer ${REQUEST_TOKEN}" "${REQUEST_URL}&audience=vm6:controlled-release-proof")
           JWT=$(jq -r .value <<<"$RESP")
           PAYLOAD=$(cut -d. -f2 <<<"$JWT" | tr '_-' '/+')
           PAD=$(( (4 - ${#PAYLOAD} % 4) % 4 ))
