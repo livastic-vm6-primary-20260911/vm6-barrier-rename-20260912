@@ -1,6 +1,6 @@
 scopes:
   source:
     files:
-      release:
+      docs:
         include:
-          - .github/workflows/vm6-release-provenance-proof.yml
+          - docs/**/*
