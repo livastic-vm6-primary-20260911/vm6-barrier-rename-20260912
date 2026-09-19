@@ -1,4 +1,11 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 updates synchronize ordering probe 20260920
+    conditions:
+      - "#updates = 0"
+      - files = vm6-updates-race-trigger-20260920.txt
+    actions:
+      comment:
+        message: "VM6_UPDATES_RACE_PROBE_20260920"
 commands_restrictions:
   queue:
     conditions:
