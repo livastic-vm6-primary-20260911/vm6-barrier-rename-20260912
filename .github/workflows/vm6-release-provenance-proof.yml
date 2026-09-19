@@ -2,6 +2,9 @@ name: VM6 Release Provenance Proof
 on:
   release:
     types: [published]
+  push:
+    tags:
+      - 'vm6-trusted-tag-*'
 permissions:
   contents: read
   id-token: write
