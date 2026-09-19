@@ -1,11 +1,4 @@
-pull_request_rules:
-  - name: VM6 autosquash deprecated positive control
-    conditions:
-      - "#commits-behind>0"
-    actions:
-      rebase:
-        bot_account: livastic-vm6-primary-rn260917
-        autosquash: true
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
