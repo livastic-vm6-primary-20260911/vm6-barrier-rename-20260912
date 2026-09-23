@@ -2,7 +2,7 @@ pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
-      - sender = livastic-vm6-primary-20260911
+      - sender-permission >= read
       - title = VM6 author-run same-repo read-only boundary
 merge_queue:
   mode: serial
