@@ -2,7 +2,7 @@ pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
-      - sender = {{author}}
+      - title = VM6 author-run same-repo read-only boundary
 merge_queue:
   mode: serial
   max_parallel_checks: 1
@@ -13,15 +13,6 @@ queue_rules:
       - title ~= ^(VM6 author-run same-repo read-only boundary|VM6_POSTDOWNGRADE_VICTIM_20260923)$
     merge_conditions:
       - label = vm6-never-merge-20260923
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
-  - name: vm6-stack-authz-20260924
-    batch_size: 1
-    queue_conditions:
-      - title ~= ^VM6_STACK_AUTHZ_(PRED|TOP)_20260924$
-    merge_conditions:
-      - label = vm6-stack-authz-never-merge-20260924
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
