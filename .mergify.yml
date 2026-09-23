@@ -7,11 +7,12 @@ merge_queue:
   mode: serial
   max_parallel_checks: 1
 queue_rules:
-  - name: default
+  - name: vm6-revocation-requeue-20260923
     batch_size: 1
-    queue_conditions: []
+    queue_conditions:
+      - title = VM6_REQUEUE_READY_20260923
     merge_conditions:
-      - check-success = @github-actions/vm6-synthetic-head-delay
+      - label = vm6-never-merge-20260923
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
