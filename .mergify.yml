@@ -2,7 +2,6 @@ pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
-      - sender-permission >= read
       - title = VM6 author-run same-repo read-only boundary
 merge_queue:
   mode: serial
