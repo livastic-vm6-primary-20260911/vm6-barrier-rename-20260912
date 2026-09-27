@@ -1,13 +1,4 @@
-pull_request_rules:
-  - name: vm6-workflow-automation-product-off-future-event-20260927
-    conditions:
-      - number = 233
-      - title = VM6_WA_AFTER_OFF_TRIGGER_20260927
-    actions:
-      label:
-        add:
-          - vm6-wa-after-off-executed-20260927
-
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
