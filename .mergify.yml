@@ -18,10 +18,3 @@ queue_rules:
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
-
-merge_protections:
-  - name: VM6 MP SAME SHA PR CONTEXT 20260928
-    if:
-      - title = VM6_MP_SAMESHA_CONTEXT_20260928
-    success_conditions:
-      - base = vm6-mp-samesha-base-a-20260928
