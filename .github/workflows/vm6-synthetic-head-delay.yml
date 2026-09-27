@@ -10,6 +10,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo 'holding while original PR head changes'
-          sleep 120
-          echo 'old synthetic CI success'
+          if [[ "${{ github.head_ref }}" == mergify/merge-queue/* ]]; then
+            echo 'holding synthetic batch for product revocation window'
+            sleep 300
+          else
+            echo 'short control path for normal pull requests'
+            sleep 5
+          fi
+          echo 'delay check success'

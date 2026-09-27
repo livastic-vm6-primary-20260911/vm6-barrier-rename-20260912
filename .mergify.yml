@@ -2,19 +2,20 @@ pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
-      - sender-permission >= write
+      - sender = {{author}}
 
 merge_queue:
   mode: serial
   max_parallel_checks: 1
 
 queue_rules:
-  - name: vm6-pending-revocation-20260927
+  - name: vm6-product-off-attacker-content-20260927
     batch_size: 1
     queue_conditions:
-      - title = VM6_PENDING_TRIGGER_20260927
+      - title = VM6_PRODUCT_OFF_ATTACKER_CONTENT_20260927
     merge_conditions:
-      - title = VM6_PENDING_TRIGGER_20260927
+      - title = VM6_PRODUCT_OFF_ATTACKER_CONTENT_20260927
+      - check-success = vm6-synthetic-head-delay
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
