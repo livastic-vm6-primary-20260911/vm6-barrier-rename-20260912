@@ -1,0 +1,20 @@
+name: VM6 Qualified Check Base Gate
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  gate:
+    name: gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Base-repository trusted gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event.pull_request.title }}" == "VM6_QUALIFIED_GHA_FORK_BINDING_20260927" ]]; then
+            echo "controlled base-repository gate failure"
+            exit 1
+          fi
+          echo "non-target setup/cleanup control success"
