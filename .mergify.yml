@@ -3,18 +3,21 @@ commands_restrictions:
   queue:
     conditions:
       - sender-permission >= write
+  dequeue:
+    conditions:
+      - sender-permission >= write
 
 merge_queue:
   mode: serial
   max_parallel_checks: 1
 
 queue_rules:
-  - name: vm6-pending-revocation-20260927
+  - name: vm6-direct-dequeue-authz-20260928
     batch_size: 1
     queue_conditions:
-      - title = VM6_PENDING_TRIGGER_20260927
+      - number = 233
     merge_conditions:
-      - title = VM6_PENDING_TRIGGER_20260927
+      - label = VM6_NEVER_MERGE_DEQUEUE_20260928
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
