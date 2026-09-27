@@ -2,7 +2,7 @@ pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
-      - sender = {{author}}
+      - sender-permission >= write
 
 merge_queue:
   mode: serial
@@ -15,15 +15,6 @@ queue_rules:
       - title = VM6_PENDING_TRIGGER_20260927
     merge_conditions:
       - title = VM6_PENDING_TRIGGER_20260927
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
-  - name: vm6-stack-authz-clean-20260927
-    batch_size: 1
-    queue_conditions:
-      - title ~= ^VM6_STACK_AUTHZ_CLEAN_(PRED|TOP)_20260927$
-    merge_conditions:
-      - label = vm6-stack-authz-never-merge-20260927
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
