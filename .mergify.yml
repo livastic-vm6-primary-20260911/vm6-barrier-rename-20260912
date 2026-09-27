@@ -9,13 +9,12 @@ merge_queue:
   max_parallel_checks: 1
 
 queue_rules:
-  - name: vm6-addedfiles-batch-context-20260928
-    batch_size: 2
+  - name: vm6-pending-revocation-20260927
+    batch_size: 1
     queue_conditions:
-      - title ~= ^VM6_ADDEDFILES_BATCH_[AB]_20260928$
+      - title = VM6_PENDING_TRIGGER_20260927
     merge_conditions:
-      - "#added-files <= 1"
-      - label = VM6_NEVER_MERGE_ADDEDFILES_20260928
+      - title = VM6_PENDING_TRIGGER_20260927
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
