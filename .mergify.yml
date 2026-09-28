@@ -3,17 +3,17 @@ commands_restrictions:
   queue:
     conditions:
       - sender = livastic-vm6-primary-20260911
-      - number = 357
+      - number = 359
 
 merge_queue:
   mode: serial
   max_parallel_checks: 1
 
 queue_rules:
-  - name: vm6-ffinplace2-stale-base-20260928
+  - name: vm6-ffinplace3-stale-base-20260928
     batch_size: 1
     queue_conditions:
-      - number = 357
+      - number = 359
       - check-success = @github-actions/vm6-ff-inplace-quick
     merge_conditions: []
     max_checks_retries: 0
