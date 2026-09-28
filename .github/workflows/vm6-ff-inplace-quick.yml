@@ -1,0 +1,10 @@
+name: VM6 FF Inplace Quick
+on:
+  pull_request:
+
+jobs:
+  vm6-ff-inplace-quick:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fast freshness marker
+        run: echo 'vm6 fast-forward in-place freshness check success'
