@@ -2,20 +2,19 @@ pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
-      - sender = livastic-vm6-primary-20260911
-      - number = 354
+      - sender-permission >= write
 
 merge_queue:
   mode: serial
   max_parallel_checks: 1
 
 queue_rules:
-  - name: vm6-ff-inplace-stale-base-20260928
+  - name: vm6-pending-revocation-20260927
     batch_size: 1
     queue_conditions:
-      - number = 354
-      - check-success = @github-actions/vm6-synthetic-head-delay
-    merge_conditions: []
+      - title = VM6_PENDING_TRIGGER_20260927
+    merge_conditions:
+      - title = VM6_PENDING_TRIGGER_20260927
     max_checks_retries: 0
-    merge_method: fast-forward
+    merge_method: merge
     checks_timeout: null
