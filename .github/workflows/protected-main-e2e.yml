@@ -76,7 +76,7 @@ jobs:
 
       - name: Validate and install trusted dependencies
         run: |
-          npm install --ignore-scripts --no-audit --no-fund
+          npm ci --include=dev --ignore-scripts --no-audit --no-fund
           npm run validate:payload
 
       - name: Plain Playwright control
@@ -145,7 +145,7 @@ jobs:
 
       - name: Validate and install trusted dependencies
         run: |
-          npm install --ignore-scripts --no-audit --no-fund
+          npm ci --include=dev --ignore-scripts --no-audit --no-fund
           npm run validate:payload
 
       - name: Mergify Playwright 0.4.2 treatment
