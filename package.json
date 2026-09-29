@@ -1,9 +1,0 @@
-{
-  "name": "vm6-vitest-quarantine-impact",
-  "private": true,
-  "type": "module",
-  "devDependencies": {
-    "@mergifyio/vitest": "0.4.1",
-    "vitest": "4.1.10"
-  }
-}
