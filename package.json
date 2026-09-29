@@ -9,6 +9,6 @@
   },
   "devDependencies": {
     "@mergifyio/playwright": "0.4.2",
-    "@playwright/test": "1.56.1"
+    "@playwright/test": "1.62.1"
   }
 }
