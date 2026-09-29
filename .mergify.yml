@@ -1,4 +1,15 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 Playwright marker protected-main impact 20260929
+    conditions:
+      - title = VM6_PLAYWRIGHT_MARKER_PROTECTED_20260929
+      - author = livastic-vm6-primary-20260911
+      - "#files = 1"
+      - files = tests/attacker.spec.mjs
+      - check-success = @github-actions/vm6-playwright-marker-treatment
+    actions:
+      merge:
+        method: merge
+
 commands_restrictions:
   queue:
     conditions:
