@@ -1,15 +1,4 @@
-pull_request_rules:
-  - name: VM6 Playwright 0.4.2 non-code listing promotion
-    conditions:
-      - base = main
-      - title = VM6_PLAYWRIGHT_LISTING_MARKER_NONCODE_042
-      - author = livastic-vm6-primary-20260911
-      - "#files = 1"
-      - files ~= ^data/payload[.]json$
-      - check-success = vm6-playwright-042/mergify-treatment
-    actions:
-      merge:
-        method: merge
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
