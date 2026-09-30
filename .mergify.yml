@@ -1,4 +1,17 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 shared-head auto-merge trigger 261001
+    conditions:
+      - base = vm6-shared-head-base1-261001
+      - title = VM6_SHARED_HEAD_DELETE_TRIGGER_261001
+    actions:
+      merge: {}
+  - name: VM6 shared-head delete after merge 261001
+    conditions:
+      - merged
+      - title = VM6_SHARED_HEAD_DELETE_TRIGGER_261001
+    actions:
+      delete_head_branch:
+        force: false
 commands_restrictions:
   queue:
     conditions:
