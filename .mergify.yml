@@ -1,4 +1,14 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 Classic strict up-to-date discriminator 20260930
+    conditions:
+      - base = vm6-classic-strict-target-20260930
+      - title = VM6_CLASSIC_STRICT_ARM_20260930
+      - author = livastic-vm6-primary-20260911
+    actions:
+      merge:
+        method: merge
+        merge_bot_account: livastic-vm6-primary-rn260917
+
 commands_restrictions:
   queue:
     conditions:
