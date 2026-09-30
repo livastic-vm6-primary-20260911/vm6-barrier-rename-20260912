@@ -4,8 +4,7 @@ pull_request_rules:
       - base = main
       - title = VM6_SQUASH_HEAD_OWNER_DEPUTY_261001
     actions:
-      squash:
-        bot_account: livastic-vm6-primary-rn260917
+      squash: {}
 commands_restrictions:
   queue:
     conditions:
