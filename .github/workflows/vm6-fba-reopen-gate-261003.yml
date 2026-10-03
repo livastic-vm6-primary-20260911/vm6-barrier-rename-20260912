@@ -1,16 +1,8 @@
-name: VM6 FBA Reopen Gate 261003
+name: VM6 FBA Reopen Gate 261003 (inactive)
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 jobs:
-  vm6-fba-reopen-gate:
+  inactive:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Standalone content gate
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f vm6-nobot-control-one.txt
-          cat vm6-nobot-control-one.txt
+      - run: echo 'VM6 FBA discriminator cleaned; no automatic trigger remains.'
