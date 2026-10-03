@@ -1,0 +1,17 @@
+name: VM6 FBA External Gate 261003
+on:
+  pull_request:
+    branches:
+      - vm6-fba-ext-protected-261003
+jobs:
+  vm6-fba-ext-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trusted ordering gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "VM6_FBA_EXT_GATE_HEAD=${GITHUB_SHA}"
+          test -f vm6-fba-ext/order.txt
+          cat vm6-fba-ext/order.txt
