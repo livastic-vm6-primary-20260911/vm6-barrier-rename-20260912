@@ -1,0 +1,16 @@
+name: VM6 FBA Explicit Gate 261003
+on:
+  pull_request:
+    branches:
+      - vm6-fba-explicit-protected-261003
+jobs:
+  vm6-fba-explicit-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Standalone integrity gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f critical/control.txt
+          cat critical/control.txt
