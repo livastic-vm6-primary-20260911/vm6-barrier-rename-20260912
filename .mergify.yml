@@ -5,35 +5,16 @@ pull_request_rules:
       - title = VM6_SQUASH_HEAD_OWNER_DEPUTY_261001
     actions:
       squash: {}
-
-  - name: VM6 FBA external read-only autoqueue 261003
-    conditions:
-      - base = vm6-fba-ext-protected-261003
-      - title = VM6_FBA_EXT_B_261003
-      - author = livastic-vm6-primary-20260911
-    actions:
-      queue: {}
-
 commands_restrictions:
   queue:
     conditions:
       - sender-permission >= write
 
 merge_queue:
-  mode: parallel
-  max_parallel_checks: 2
+  mode: serial
+  max_parallel_checks: 1
 
 queue_rules:
-  - name: vm6-fba-ext-261003
-    batch_size: 1
-    queue_conditions:
-      - base = vm6-fba-ext-protected-261003
-    merge_conditions:
-      - check-success = @github-actions/vm6-fba-ext-gate
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
-
   - name: vm6-pending-revocation-20260927
     batch_size: 1
     queue_conditions:
@@ -43,12 +24,3 @@ queue_rules:
     max_checks_retries: 0
     merge_method: merge
     checks_timeout: null
-
-scopes:
-  source:
-    files:
-      ext-order:
-        include:
-          - vm6-fba-ext/**
-  capacities:
-    ext-order: 1
