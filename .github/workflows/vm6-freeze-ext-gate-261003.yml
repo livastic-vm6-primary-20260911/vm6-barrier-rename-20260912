@@ -7,4 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: test -f lane/canary.txt
+      - name: Controlled gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f lane/canary.txt
+          if grep -qx 'TRUSTED_A_FREEZE_261003' lane/canary.txt; then
+            sleep 90
+          fi
