@@ -1,7 +1,7 @@
 pull_request_rules:
   - name: VM6 freeze exception external autoqueue 261003
     conditions:
-      - base = vm6-freeze-ext-protected-261003
+      - base = main
       - title = VM6_FREEZE_EXT_B_261003
       - author = livastic-vm6-primary-20260911
     actions:
@@ -27,7 +27,8 @@ queue_rules:
   - name: vm6-freeze-ext-261003
     batch_size: 1
     queue_conditions:
-      - base = vm6-freeze-ext-protected-261003
+      - base = main
+      - title ~= ^VM6_FREEZE_EXT_[AB]_261003$
     merge_conditions:
       - check-success = @github-actions/vm6-freeze-ext-gate
     max_checks_retries: 0
