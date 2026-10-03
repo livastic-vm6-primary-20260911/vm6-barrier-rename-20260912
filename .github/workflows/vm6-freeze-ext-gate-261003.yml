@@ -1,7 +1,7 @@
 name: VM6 Freeze Gate
 on:
   pull_request:
-    branches: [vm6-freeze-ext-protected-261003]
+    branches: [main]
 jobs:
   vm6-freeze-ext-gate:
     runs-on: ubuntu-latest
