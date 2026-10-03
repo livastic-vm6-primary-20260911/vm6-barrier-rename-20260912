@@ -1,15 +1,4 @@
 pull_request_rules:
-  - name: VM6 request_reviews stale-head support 261003
-    conditions:
-      - base = main
-      - title = VM6_REQREV_STALE_261003
-      - author = livastic-vm6-primary-20260911
-      - check-success = vm6-reqrev-race-gate
-    actions:
-      request_reviews:
-        users:
-          - livastic-vm6-primary-rn260917
-
   - name: VM6 squash head-owner deputy 261001
     conditions:
       - base = main
