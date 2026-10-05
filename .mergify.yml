@@ -83,7 +83,6 @@ scopes:
         include:
         - critical/caf?.txt
         - critical/[^x].txt
-        - critical/x[a/b]y.txt
   capacities:
     lane: 1
     critical: 1
