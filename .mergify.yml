@@ -19,6 +19,13 @@ pull_request_rules:
   - author = livastic-vm6-primary-20260911
   actions:
     queue: {}
+- name: VM6 caret class scope autoqueue 261006
+  conditions:
+  - base = main
+  - title ~= ^VM6_CARET_SCOPE_(CONTROL|TREATMENT)_261006$
+  - author = livastic-vm6-primary-20260911
+  actions:
+    queue: {}
 commands_restrictions:
   queue:
     conditions:
@@ -56,6 +63,16 @@ queue_rules:
   max_checks_retries: 0
   merge_method: merge
   checks_timeout: null
+- name: vm6-caret-scope-261006
+  batch_size: 1
+  queue_conditions:
+  - base = main
+  - title ~= ^VM6_CARET_SCOPE_(CONTROL|TREATMENT)_261006$
+  merge_conditions:
+  - check-success = @github-actions/vm6-unicode-ci-gate
+  max_checks_retries: 0
+  merge_method: merge
+  checks_timeout: null
 scopes:
   source:
     files:
@@ -65,6 +82,7 @@ scopes:
       critical:
         include:
         - critical/caf?.txt
+        - critical/[^x].txt
   capacities:
     lane: 1
     critical: 1
