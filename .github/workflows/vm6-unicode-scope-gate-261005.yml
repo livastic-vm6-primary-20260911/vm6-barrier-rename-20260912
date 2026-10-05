@@ -1,0 +1,45 @@
+name: VM6 Unicode Scope Gate 261005
+on:
+  pull_request:
+
+jobs:
+  detect-scopes:
+    runs-on: ubuntu-24.04
+    outputs:
+      critical: ${{ fromJSON(steps.scopes.outputs.scopes).critical }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Detect scopes with released Mergify CLI
+        id: scopes
+        uses: Mergifyio/gha-mergify-ci@v26
+        with:
+          action: scopes
+          mergify_cli_version: 2026.10.1
+
+  critical-gate:
+    name: vm6-unicode-critical-gate
+    needs: detect-scopes
+    if: ${{ needs.detect-scopes.outputs.critical == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Deterministic controlled security gate
+        run: |
+          echo VM6_CRITICAL_GATE_RAN
+          exit 1
+
+  ci-gate:
+    name: vm6-unicode-ci-gate
+    if: ${{ !cancelled() }}
+    needs:
+      - detect-scopes
+      - critical-gate
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Aggregate scope-driven jobs
+        uses: Mergifyio/gha-mergify-ci@v26
+        with:
+          action: wait-jobs
+          jobs: ${{ toJSON(needs) }}
+          mergify_cli_version: 2026.10.1
