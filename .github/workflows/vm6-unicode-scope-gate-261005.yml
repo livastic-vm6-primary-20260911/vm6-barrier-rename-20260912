@@ -16,7 +16,9 @@ jobs:
         uses: Mergifyio/gha-mergify-ci@v26
         with:
           action: scopes
-          mergify_cli_version: 2026.10.1
+          mergify_cli_version: 2026.10.3
+          base: ${{ github.base_ref }}
+          head: ${{ github.head_ref }}
 
   critical-gate:
     name: vm6-unicode-critical-gate
