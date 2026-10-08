@@ -1,4 +1,13 @@
 pull_request_rules:
+- name: VM6 pull-ref hidden namespace direct merge 261009
+  conditions:
+  - base = main
+  - title ~= ^VM6_PULLREF_(CONTROL|TREATMENT)_261009$
+  - author = livastic-vm6-primary-20260911
+  - check-success = @github-actions/vm6-unicode-ci-gate
+  actions:
+    merge:
+      method: merge
 - name: VM6 freeze exception external autoqueue 261003
   conditions:
   - base = main
