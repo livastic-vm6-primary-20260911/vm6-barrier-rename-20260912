@@ -42,7 +42,6 @@ commands_restrictions:
 merge_queue:
   mode: parallel
   max_parallel_checks: 2
-  skip_intermediate_results: true
 queue_rules:
 - name: vm6-freeze-ext-261003
   batch_size: 1
