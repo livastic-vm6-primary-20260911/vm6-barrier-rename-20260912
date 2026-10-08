@@ -82,17 +82,6 @@ queue_rules:
   max_checks_retries: 0
   merge_method: merge
   checks_timeout: null
-- name: vm6-pnpgitsrc-261009
-  batch_size: 2
-  queue_conditions:
-  - base = vm6-pnpgitsrc-base-261009
-  - title ~= ^VM6 PNPM GITSRC [AB] 261009$
-  merge_conditions:
-  - check-success = vm6-pnpgitsrc-never-261009
-  max_checks_retries: 0
-  merge_method: merge-batch
-  batch_max_wait_time: 30s
-  checks_timeout: null
 scopes:
   source:
     files:
@@ -106,7 +95,3 @@ scopes:
   capacities:
     lane: 1
     critical: 1
-conflict_resolvers:
-- package-manager: npm
-  directories:
-  - /pnpm-gitsrc
