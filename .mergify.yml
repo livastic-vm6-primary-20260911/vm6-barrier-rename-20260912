@@ -40,8 +40,8 @@ commands_restrictions:
     conditions:
     - sender-permission >= write
 merge_queue:
-  mode: parallel
-  max_parallel_checks: 2
+  mode: serial
+  max_parallel_checks: 1
 queue_rules:
 - name: vm6-freeze-ext-261003
   batch_size: 1
@@ -81,6 +81,17 @@ queue_rules:
   - check-success = @github-actions/vm6-unicode-ci-gate
   max_checks_retries: 0
   merge_method: merge
+  checks_timeout: null
+- name: vm6-workflow-toctou-261009
+  batch_size: 1
+  queue_conditions:
+  - base = vm6-workflow-toctou-base-261009
+  - title = VM6_WORKFLOW_TOCTOU_261009
+  - check-success = @github-actions/vm6-unicode-ci-gate
+  merge_conditions: []
+  max_checks_retries: 0
+  merge_method: merge
+  update_method: merge
   checks_timeout: null
 scopes:
   source:
